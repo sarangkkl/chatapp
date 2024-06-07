@@ -24,7 +24,7 @@ const App = () => {
       email:email,
       password:password
     }).then((response)=>{
-      console.log(response.data.access_token)
+      // console.log(response.data.access_token)
       setAccess_token(response.data.access_token)
       setUser({"email":email,"password":password})
     }).catch((error)=>{
@@ -46,7 +46,7 @@ const App = () => {
         <h1>Welcome {user.email}</h1>
       </div> : <h1>Not Logged In</h1>}
 
-      {access_token ? <ShowFriends BASE_URL={BASE_URL} access_token={access_token} /> : null}
+      {access_token ? <ShowFriends BASE_URL={BASE_URL} access_token={access_token} user={user}/> : null}
     </div>
   )
 }

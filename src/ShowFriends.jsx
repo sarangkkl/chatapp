@@ -1,9 +1,10 @@
 import React,{useEffect,useState} from 'react';
 import axios from 'axios';
+import ChatDetail from './ChatDetail';
 
 
-const ShowFriends = ({BASE_URL,access_token}) => {
-    console.log(BASE_URL,access_token)
+const ShowFriends = ({BASE_URL,access_token,user}) => {
+    // console.log(BASE_URL,access_token)
     const [channels, setChannels] = useState()
     const [active_channel, setActive_channel] = useState()
 
@@ -13,7 +14,7 @@ const ShowFriends = ({BASE_URL,access_token}) => {
                 Authorization: `Bearer ${access_token}`
             }
         }).then((response)=>{
-            console.log(response.data)
+            // console.log(response.data)
             setChannels(response.data)
         }
         ).catch((error)=>{
@@ -35,6 +36,10 @@ const ShowFriends = ({BASE_URL,access_token}) => {
                 </div>
             )
         }) : null}
+        { active_channel ? <ChatDetail BASE_URL={BASE_URL} CHANNEL_ID={active_channel} ACCESS_TOKEN={access_token} user={user}/>:<>
+        No Active chat
+        </>}
+        
     </div>
   )
 }
